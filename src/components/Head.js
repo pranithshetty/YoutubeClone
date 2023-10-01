@@ -1,29 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { toggleMenu } from "../utils/appSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { cacheQueries } from "../utils/searchSlice";
 
 const Head = () => {
 	const dispatch = useDispatch();
-	const toggleMenuHandler = () => {
-		return dispatch(toggleMenu());
-	};
-	const getSearchQueryResults = async () => {
-		const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-		const json = await data.json();
-		setSuggestions(json[1]);
-	};
 	const [searchQuery, setSearchQuery] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
 	const [suggestionsVisible, setSuggestionsVisible] = useState(false);
+
+	const cache = useSelector((store) => store.search);
+
 	useEffect(() => {
 		//deboucing the search
-		const timer = setTimeout(() => getSearchQueryResults(), 200);
+		const timer = setTimeout(() => {
+			if (cache[searchQuery]) {
+				setSuggestions(cache[searchQuery]);
+			} else {
+				getSearchQueryResults();
+			}
+		}, 200);
+
+		// const timer = setTimeout(() => {
+		// 	getSearchQueryResults();
+		// }, 200);
 
 		return () => {
 			clearTimeout(timer);
 		};
 	}, [searchQuery]);
+
+	const toggleMenuHandler = () => {
+		return dispatch(toggleMenu());
+	};
+
+	const getSearchQueryResults = async () => {
+		console.log(searchQuery);
+		const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+		const json = await data.json();
+		setSuggestions(json[1]);
+		dispatch(cacheQueries({ [searchQuery]: json[1] }));
+	};
+
 	return (
 		<div className="grid grid-flow-col p-2 m-2 shadow-lg">
 			<div className="flex col-span-1 items-center">
