@@ -14,11 +14,11 @@ const VideoContainer = () => {
 		getVideos();
 	}, []);
 	return (
-		<div className="flex flex-wrap">
+		<div className="flex flex-wrap justify-evenly">
 			{videos.map((video) => {
 				return (
-					<Link to={"watch?v=" + video.id}>
-						<VideoCards key={video.id} videoInfo={video} />
+					<Link key={video.id} to={"watch?v=" + video.id}>
+						<VideoCards videoInfo={video} />
 					</Link>
 				);
 			})}

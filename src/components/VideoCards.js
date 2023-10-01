@@ -1,7 +1,7 @@
 import React from "react";
 
 const VideoCards = ({ videoInfo }) => {
-	console.log(videoInfo);
+	//console.log(videoInfo);
 	const { snippet, statistics } = videoInfo;
 	const { title, thumbnails, channelTitle } = snippet;
 	const { viewCount } = statistics;
