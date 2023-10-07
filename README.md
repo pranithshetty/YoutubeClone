@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Youtube Clone App
+
+Add .env file with name REACT*APP_MY_KEY need to prefix with REACT_APP*[...] when using create-react-app
+
+Add your api key from dev.
 
 ## Available Scripts
 
