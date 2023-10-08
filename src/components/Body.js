@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const Body = () => {
 	return (
-		<>
+		<div className=" col-span-12">
 			<Head />
 			<div className="grid grid-flow-col">
 				<SideBar />
@@ -13,7 +13,7 @@ const Body = () => {
 				{/* <MainContainer />
 			<WatchPage/> */}
 			</div>
-		</>
+		</div>
 	);
 };
 

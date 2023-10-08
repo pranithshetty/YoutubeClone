@@ -99,7 +99,7 @@ const commentData = [
 ];
 
 const Comment = ({ data }) => {
-	console.log(data);
+	//console.log(data);
 	return (
 		<div className="flex my-1 bg-gray-100 rounded-lg">
 			<img
@@ -118,9 +118,9 @@ const Comment = ({ data }) => {
 const CommentList = ({ comments }) => {
 	return (
 		<>
-			{comments.map((comment) => {
+			{comments.map((comment, index) => {
 				return (
-					<div>
+					<div key={index}>
 						<Comment data={comment} />
 						<div className="ml-6 border-l border-l-gray-400">
 							<CommentList comments={comment.replies} />

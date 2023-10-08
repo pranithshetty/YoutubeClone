@@ -73,7 +73,14 @@ const Head = () => {
 					onFocus={() => setSuggestionsVisible(true)}
 					onBlur={() => setSuggestionsVisible(false)}
 				/>
-				<button className="border border-gray-300 rounded-r-full px-3 py-2 ">
+				<button
+					onClick={() => {
+						console.log(searchQuery);
+
+						navigate("/search?q=" + searchQuery);
+					}}
+					className="border border-gray-300 rounded-r-full px-3 py-2 "
+				>
 					🔍
 				</button>
 
@@ -101,11 +108,6 @@ const Head = () => {
 			</div>
 			<div className="col-span-1">
 				<img
-					onClick={() => {
-						console.log("clicked");
-						// setSearchQuery();
-						// navigate("/search?q=");
-					}}
 					className="h-8"
 					alt="user-icon"
 					src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
