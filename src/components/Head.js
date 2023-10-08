@@ -10,7 +10,8 @@ const Head = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
 	const [suggestionsVisible, setSuggestionsVisible] = useState(false);
-	//const navigate = useNavigate();
+	//const [clickedValue, setClickedValue] = useState("");
+	const navigate = useNavigate();
 
 	const cache = useSelector((store) => store.search);
 
@@ -38,7 +39,7 @@ const Head = () => {
 	};
 
 	const getSearchQueryResults = async () => {
-		console.log(searchQuery);
+		//console.log(searchQuery);
 		const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
 		const json = await data.json();
 		setSuggestions(json[1]);
@@ -67,6 +68,7 @@ const Head = () => {
 				<input
 					className="w-1/2  border border-gray-300 rounded-l-full px-4 py-2"
 					type="text"
+					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					onFocus={() => setSuggestionsVisible(true)}
 					onBlur={() => setSuggestionsVisible(false)}
@@ -83,7 +85,11 @@ const Head = () => {
 									<li
 										key={suggestion}
 										className="px-2 py-2 shadow-sm hover:bg-gray-200"
-										// onClick={() => navigate("/search/v?" + suggestion)}
+										onMouseDown={() => {
+											//cant use onclick since onBlur fired before it
+											setSearchQuery(suggestion);
+											navigate("/search?q=" + suggestion);
+										}}
 									>
 										{suggestion}
 									</li>
@@ -95,6 +101,11 @@ const Head = () => {
 			</div>
 			<div className="col-span-1">
 				<img
+					onClick={() => {
+						console.log("clicked");
+						// setSearchQuery();
+						// navigate("/search?q=");
+					}}
 					className="h-8"
 					alt="user-icon"
 					src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"

@@ -24,7 +24,7 @@ function App() {
 	return (
 		<>
 			<Provider store={store}>
-				<Head />
+				{/* <Head /> */}
 				<RouterProvider router={appRouter} />
 			</Provider>
 		</>
