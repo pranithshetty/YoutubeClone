@@ -45,24 +45,35 @@ const WatchPage = () => {
 						</span>
 						<div className="flex items-center">
 							<img
-								className="h-7 m-2"
+								className="h-8 my-2"
 								alt="user-icon"
 								src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
 							/>
-							<span className="text-lg font-semibold">
-								{videoData?.snippet?.channelTitle}
-							</span>
+							<div className="flex flex-col mx-2 px-2">
+								<span className="text-lg font-semibold">
+									{videoData?.snippet?.channelTitle}
+								</span>
+								<span className="text-sm">XXX subscribers</span>
+							</div>
+
+							<button className="rounded-full bg-slate-300 px-3 p-2 m-2 mx-3 font-semibold">
+								Subscribe
+							</button>
 						</div>
-						<span>Hello</span>
+						<div></div>
+
 						<div
-							className=" px-2 mx-2 overflow-hidden w-[800px]"
+							className=" overflow-hidden w-[800px] flex flex-col bg-slate-100 rounded-t-xl"
 							style={{ height: `${seeMore}px` }}
 						>
-							<span>{videoData?.snippet?.description}</span>
+							<span>{videoData?.statistics?.viewCount} views</span>
+							<span className="font-semibold text-sm">
+								{videoData?.snippet?.description}
+							</span>
 						</div>
 						<span
 							onMouseDown={() => setSeeMore(200)}
-							className="text-blue-500 bg-transparent px-2 mx-2"
+							className="text-blue-500  w-[800px] bg-slate-100 rounded-b-xl"
 						>
 							See more..
 						</span>
